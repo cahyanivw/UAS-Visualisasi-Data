@@ -24,7 +24,8 @@ Tanggal akses diisi sesuai hari saat tabel diunduh.
 
 | Data | Sumber | Lisensi |
 |------|--------|---------|
-| Batas wilayah digital (GeoJSON) | Badan Informasi Geospasial (BIG), melalui repositori `ardian28/GeoJson-Indonesia-38-Provinsi` | MIT |
+| Batas provinsi (GeoJSON) | Badan Informasi Geospasial (BIG), melalui repositori `ardian28/GeoJson-Indonesia-38-Provinsi` | MIT |
+| Batas kab/kota (GeoJSON) | GADM v4.0 (gadm.org), lewat repositori `mahendrayudha/indonesia-geojson` | Cek ketentuan di gadm.org |
 
 ## Data turunan (dihitung sendiri)
 
