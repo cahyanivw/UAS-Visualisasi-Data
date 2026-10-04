@@ -85,6 +85,16 @@ footer{background:#0c1a27;color:#c6d3df;padding:2rem 1.2rem;font-size:.85rem}foo
  #end .card{flex:none}
  #end .wrap{justify-content:center}
 }
+@media(min-width:821px){
+ #p5.panel{height:auto!important;min-height:0!important;overflow:visible!important;padding:4rem 1.2rem 2rem!important}
+ #p5.panel .wrap{height:auto!important;display:block!important}
+ #p5 .card{display:block!important;flex:none!important}
+ #p5 .scroll{display:block!important;flex:none!important;overflow:visible!important}
+ #p5 svg{height:auto!important;width:100%!important;flex:none!important;min-width:0!important}
+ #p5 .grid{display:grid!important;grid-template-columns:1fr 1.15fr!important;grid-template-rows:auto!important;gap:1.5rem}
+ #p5 .grid>div{display:block!important}
+ #p5 .lead{font-size:1rem}
+}
 </style></head><body>
 <div id="bar"></div><nav id="dots" aria-label="Navigasi bagian"></nav>
 
@@ -226,7 +236,7 @@ const v=new Map(n.edges.map(e=>[e.asal+"|"+e.tujuan,e.jumlah]));const c=matrix("
 d3.select("#odf").selectAll("option").data(["ALL",...ids]).join("option").attr("value",d=>d).text(d=>d==="ALL"?"Semua provinsi":nm.get(d));
 d3.select("#odf").on("change",function(){const k=this.value;c.attr("opacity",d=>k==="ALL"||d.a===k?1:.12)})}
 
-function matrix(sel,ids,nm,val,strip,tf,mx){const cw=26,s=16,L=150,T=150,W=L+ids.length*cw+10,H=T+ids.length*s+50,svg=d3.select(sel).attr("viewBox",`0 0 ${W} ${H}`),cs=x=>x?d3.interpolateCividis(.05+.95*Math.log10(x)/Math.log10(mx)):"#ece5d6";
+function matrix(sel,ids,nm,val,strip,tf,mx){const cw=36,s=15,L=150,T=140,W=L+ids.length*cw+10,H=T+ids.length*s+50,svg=d3.select(sel).attr("viewBox",`0 0 ${W} ${H}`),cs=x=>x?d3.interpolateCividis(.05+.95*Math.log10(x)/Math.log10(mx)):"#ece5d6";
 ids.forEach((a,i)=>{svg.append("text").attr("x",L-6).attr("y",T+i*s+s*.72).attr("text-anchor","end").attr("font-size",12).text(nm.get(a));svg.append("text").attr("transform",`translate(${L+i*cw+cw/2+4},${T-6}) rotate(-60)`).attr("font-size",12).text(nm.get(a))});
 const cells=[];ids.forEach(a=>ids.forEach(b=>cells.push({a,b,x:a===b?0:val(a,b),dg:a===b})));
 const c=svg.append("g").selectAll("rect").data(cells).join("rect").attr("x",d=>L+ids.indexOf(d.b)*cw).attr("y",d=>T+ids.indexOf(d.a)*s).attr("width",cw-1).attr("height",s-1).attr("fill",d=>d.dg?"#fff":cs(d.x)).attr("stroke",d=>d.dg?"#d9d0bd":null);
