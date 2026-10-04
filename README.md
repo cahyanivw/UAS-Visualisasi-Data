@@ -1,4 +1,4 @@
-# Webstory Visualisasi Data BPS 2022
+# Webstory Visualisasi Data 
 
 ## Ke mana orang pindah, dan siapa yang tertinggal?
 
