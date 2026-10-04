@@ -18,11 +18,11 @@ h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.12;margin:0}
 .panel{padding:5.5rem 1.2rem 4.5rem;position:relative}.panel:nth-of-type(even){background:var(--paper2)}
 .wrap{max-width:1040px;margin:auto}
 .kick{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--out);margin:0 0 .8rem}
-h2{font-size:clamp(1.7rem,4.3vw,2.9rem);max-width:24ch;margin-bottom:1rem}
-.lead{max-width:62ch;color:#2c3744;margin:0 0 1.6rem}
+h2{font-size:clamp(1.7rem,4.3vw,2.9rem);max-width:none;margin-bottom:1rem}
+.lead{max-width:none;color:#2c3744;margin:0 0 1.6rem}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;box-shadow:0 8px 30px -18px #0005}
-.note{border-left:5px solid var(--out);padding:.2rem .9rem;margin:1rem 0 0;max-width:72ch;background:#fff8;font-size:.95rem}
-.src{font-size:.76rem;color:var(--mut);margin:.8rem 0 0;max-width:90ch}
+.note{border-left:5px solid var(--out);padding:.2rem .9rem;margin:1rem 0 0;max-width:none;background:#fff8;font-size:.95rem}
+.src{font-size:.76rem;color:var(--mut);margin:.8rem 0 0;max-width:none}
 .scroll{overflow-x:auto}.scroll>svg{min-width:520px}
 svg{width:100%;height:auto;display:block}text{font-family:inherit}
 .ctl{display:flex;flex-wrap:wrap;gap:.7rem 1.4rem;align-items:center;margin:0 0 .8rem;font-size:.92rem}
@@ -41,19 +41,20 @@ h3{font-size:1rem;margin:1.1rem 0 .3rem}
 #tip{position:fixed;pointer-events:none;opacity:0;background:var(--ink);color:#fff;padding:.45rem .65rem;font-size:.82rem;max-width:230px;z-index:99;border-radius:6px;line-height:1.4}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s,transform .9s}.rv.in{opacity:1;transform:none}
 #hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:radial-gradient(circle at 75% 60%,#12324a 0,#08111a 60%,#050b14 100%);overflow:hidden}
-#hero .wrap{position:relative;z-index:2;pointer-events:none;text-shadow:0 2px 18px #000a}
-.cue{z-index:2;position:absolute; ...}   
+#hero .wrap{position:relative;z-index:2;pointer-events:none;text-shadow:0 2px 18px #000a}   
 #globe{position:absolute;left:0;right:0;top:10%;bottom:-22%;z-index:0}
 #globe canvas{outline:none}
+ #hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#050b14f2 0%,#050b14b8 34%,#050b1400 68%),linear-gradient(0deg,#050b14 0%,#050b1400 20%)}
+@media(min-width:821px){#globe{left:15%;right:-15%}}
 @media(max-width:820px){
- #globe{top:38%;bottom:-6%;left:15%;right:-15%;pointer-events:none}
+ #globe{top:38%;bottom:-6%;pointer-events:none}
  #hero{align-items:flex-start;padding-top:5.5rem}
  #hero::before{background:linear-gradient(180deg,#050b14f0 0%,#050b14b0 40%,#050b1400 66%)}
 }
 #hero h1{font-size:clamp(2.2rem,7vw,5rem);max-width:15ch}#hero .kick{color:var(--gold)}
 #hero p.sub{max-width:56ch;font-size:1.15rem;color:#d6e0ea;margin:1.2rem 0 2rem}
 .stats{display:flex;flex-wrap:wrap;gap:1.2rem 2.6rem}.stats b{display:block;font:700 clamp(1.8rem,5vw,3rem)/1 Georgia,serif;color:var(--gold)}.stats span{font-size:.85rem;color:#c6d3df}
-.cue{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:#aab9c7;animation:bn 1.8s infinite}
+.cue{z-index:2;position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:#aab9c7;animation:bn 1.8s infinite}
 @keyframes bn{50%{transform:translate(-50%,8px)}}
 #card{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem}@media(max-width:700px){#card{grid-template-columns:1fr}}
 .mb{height:9px;background:#e4dccb;border-radius:5px;overflow:hidden;margin:.15rem 0 .5rem}.mb i{display:block;height:100%;background:var(--in)}
@@ -64,7 +65,7 @@ footer{background:#0c1a27;color:#c6d3df;padding:2rem 1.2rem;font-size:.85rem}foo
 </style></head><body>
 <div id="bar"></div><nav id="dots" aria-label="Navigasi bagian"></nav>
 
-<section id="hero" class="panel" data-t="Pembuka"><div class="wrap"><div id="globe" aria-hidden="true"></div>
+<section id="hero" class="panel" data-t="Pembuka"><div id="globe" aria-hidden="true"></div><div class="wrap">
 <p class="kick">Webstory · BPS 2022</p>
 <h1>Ke mana orang pindah, dan siapa yang tertinggal?</h1>
 <p class="sub">Setiap hari orang meninggalkan satu provinsi untuk hidup di provinsi lain. </p>
@@ -167,6 +168,18 @@ d3.select("#dots").selectAll("a").data(secs).join("a").attr("href",d=>"#"+d.id).
 function scr(){const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight);document.getElementById("bar").style.width=(p*100)+"%";let a=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.5)a=i});d3.selectAll("#dots a").classed("on",(d,i)=>i===a)}
 addEventListener("scroll",scr,{passive:true});scr();
 const cnt=(id,v)=>{const s=d3.select(id);s.transition().duration(R?0:1800).tween("t",()=>{const i=d3.interpolateNumber(0,v);return t=>s.text(n0(i(t)))})};
+function initGlobe(g){try{const el=document.getElementById("globe"),mob=innerWidth<820,IMG="https://cdn.jsdelivr.net/npm/three-globe/example/img/",sc=document.createElement("script");
+sc.src="https://cdn.jsdelivr.net/npm/globe.gl@2/dist/globe.gl.min.js";sc.onerror=()=>{};
+sc.onload=()=>{try{const lbl=[["INDONESIA",-1.5,113,1],["Malaysia",4.2,102,0],["Australia",-25,134,0],["Filipina",12.5,122,0],["India",21,79,0],["Papua Nugini",-6.5,145,0]].map(([text,lat,lng,b])=>({text,lat,lng,b}));
+const G=Globe()(el).width(el.clientWidth).height(el.clientHeight).backgroundColor("rgba(0,0,0,0)").backgroundImageUrl(IMG+"night-sky.png").globeImageUrl(IMG+"earth-blue-marble.jpg").bumpImageUrl(IMG+"earth-topology.png").showAtmosphere(true).atmosphereColor("#5aa9ff").atmosphereAltitude(.2)
+ .polygonsData(g.features).polygonCapColor(()=>"rgba(0,214,190,.55)").polygonSideColor(()=>"rgba(0,214,190,.2)").polygonStrokeColor(()=>"rgba(160,255,245,.6)").polygonAltitude(.01).polygonsTransitionDuration(0)
+ .labelsData(lbl).labelText(d=>d.text).labelSize(d=>d.b?1.5:.9).labelColor(d=>d.b?"#ffffff":"rgba(255,255,255,.8)").labelDotRadius(0).labelResolution(2).labelAltitude(.012);
+if(!R)G.ringsData([{lat:-2,lng:118}]).ringColor(()=>t=>`rgba(127,255,240,${1-t})`).ringMaxRadius(9).ringPropagationSpeed(2).ringRepeatPeriod(1800);
+const c=G.controls();c.enableZoom=false;c.enablePan=false;c.rotateSpeed=.4;c.enableRotate=!mob;G.renderer().domElement.style.touchAction="pan-y";
+G.pointOfView({lat:mob?-2:6,lng:mob?118:96,altitude:mob?2.1:1.7},0);
+new IntersectionObserver(e=>e[0].isIntersecting?G.resumeAnimation():G.pauseAnimation()).observe(el);
+addEventListener("resize",()=>G.width(el.clientWidth).height(el.clientHeight))}catch(e){}};
+document.head.appendChild(sc)}catch(e){}}
 Promise.all([d3.json("data/kabkota_2022.geojson"),d3.json("data/multivariat.json"),d3.json("data/jaringan.json")]).then(([g,m,n])=>{ initGlobe(g);
  const tot=d3.sum(n.edges,e=>e.jumlah);cnt("#c1",tot);cnt("#c2",34);cnt("#c3",g.features.length);
  bars(m);flow(n,tot);net(n);geo(g);multi(m);link(m);explore(m,n);
