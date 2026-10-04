@@ -278,7 +278,7 @@ leg("#mLeg",[[CL[0],"Klaster 1: Jawa, Bali, Kepulauan Riau"],[CL[1],"Klaster 2: 
 const upd=()=>d3.selectAll(".mk").attr("opacity",d=>!sel||sel.has(d.key)?1:.08);
 const tp=d=>`<b>${d.provinsi}</b><br>PC1 ${n1(d.pc1)}, PC2 ${n1(d.pc2)}<br>% miskin ${n1(d.miskin_p0)}<br>UHH ${n1(d.uhh)}<br>Migrasi neto ${n0(d.migrasi_neto)}`;
 const hov=s=>s.on("pointermove",(e,d)=>show(e,tp(d))).on("pointerleave",hide);
-{const W=480,H=400,M=40,svg=d3.select("#bi").attr("viewBox",`0 0 ${W} ${H}`),x=d3.scaleLinear(d3.extent(P,d=>d.pc1),[M,W-M]).nice(),y=d3.scaleLinear(d3.extent(P,d=>d.pc2),[H-M,M]).nice();
+{const W=480,H=470,M=40,svg=d3.select("#bi").attr("viewBox",`0 0 ${W} ${H}`),x=d3.scaleLinear(d3.extent(P,d=>d.pc1),[M,W-M]).nice(),y=d3.scaleLinear(d3.extent(P,d=>d.pc2),[H-M,M]).nice();
 svg.append("g").attr("transform",`translate(0,${y(0)})`).call(d3.axisBottom(x).ticks(6));svg.append("g").attr("transform",`translate(${x(0)},0)`).call(d3.axisLeft(y).ticks(6));
 svg.append("text").attr("x",W-M).attr("y",H-6).attr("text-anchor","end").attr("font-size",11).text(`PC1 (${n1(m.varians[0]*100)}%)`);svg.append("text").attr("x",8).attr("y",14).attr("font-size",11).text(`PC2 (${n1(m.varians[1]*100)}%)`);
 const br=d3.brush().extent([[M,M-20],[W-M,H-M+10]]).on("end",e=>{if(!e.sourceEvent)return;if(!e.selection)sel=null;else{const[[a,b],[c,d]]=e.selection;sel=new Set(P.filter(p=>x(p.pc1)>=a&&x(p.pc1)<=c&&y(p.pc2)>=b&&y(p.pc2)<=d).map(p=>p.key))}upd()});svg.append("g").attr("class","br").call(br);
@@ -286,9 +286,9 @@ const s=3.2;svg.append("g").selectAll("g").data(V).join("g").call(a=>{a.append("
 svg.append("g").selectAll("circle").data(P).join("circle").attr("class","mk").attr("cx",d=>x(d.pc1)).attr("cy",d=>y(d.pc2)).attr("r",6).attr("fill",col).attr("stroke","#fff").call(hov);
 svg.append("g").selectAll("text").data(P.filter(d=>d.jarak_pusat>3.3)).join("text").attr("class","mk").attr("x",d=>x(d.pc1)+9).attr("y",d=>y(d.pc2)+3).attr("font-size",11).attr("font-weight",700).text(d=>d.provinsi);
 window.__bi=()=>svg.select(".br").call(br.move,null)}
-{const rows=m.urutan_heatmap.map(k=>P.find(p=>p.key===k)),cw=30,rh=14,L=112,T=98,svg=d3.select("#hm").attr("viewBox",`0 0 ${L+V.length*cw+84} ${T+rows.length*rh+4}`),c=d3.scaleDiverging(d3.interpolatePuOr).domain([3.5,0,-3.5]).clamp(true);
+{const rows=m.urutan_heatmap.map(k=>P.find(p=>p.key===k)),cw=30,rh=9.5,L=112,T=98,svg=d3.select("#hm").attr("viewBox",`0 0 ${L+V.length*cw+84} ${T+rows.length*rh+4}`),c=d3.scaleDiverging(d3.interpolatePuOr).domain([3.5,0,-3.5]).clamp(true);
 V.forEach((v,j)=>svg.append("text").attr("transform",`translate(${L+j*cw+cw/2},${T-5}) rotate(-50)`).attr("font-size",10.5).text(LB[v]));
-rows.forEach((d,i)=>{svg.append("text").attr("x",L-4).attr("y",T+i*rh+10.5).attr("text-anchor","end").attr("font-size",10.5).attr("class","mk").datum(d).text(d.provinsi);
+rows.forEach((d,i)=>{svg.append("text").attr("x",L-4).attr("y",T+i*rh+7.8).attr("text-anchor","end").attr("font-size",8.5).attr("class","mk").datum(d).text(d.provinsi);
 svg.append("g").selectAll("rect").data(V.map(v=>({...d,v,zz:d.z[v]}))).join("rect").attr("class","mk").attr("x",(e,j)=>L+j*cw).attr("y",T+i*rh).attr("width",cw-1).attr("height",rh-1).attr("fill",e=>c(e.zz)).on("pointermove",(ev,e)=>show(ev,`<b>${e.provinsi}</b><br>${LB[e.v]}: nilai asli ${n1(e[e.v])}<br>nilai baku ${n1(e.zz)}`)).on("pointerleave",hide)})}
 {const W=960,H=440,svg=d3.select("#pc").attr("viewBox",`0 0 ${W} ${H}`),x=d3.scalePoint(V,[60,W-60]),y=d3.scaleLinear(d3.extent(P.flatMap(d=>V.map(v=>d.z[v]))),[H-24,56]).nice(),ln=d=>d3.line()(V.map(v=>[x(v),y(d.z[v])])),ext={};
 svg.append("g").selectAll("path").data(P).join("path").attr("class","mk").attr("d",ln).attr("fill","none").attr("stroke",col).attr("stroke-width",1.8).attr("stroke-opacity",.8).call(hov);
