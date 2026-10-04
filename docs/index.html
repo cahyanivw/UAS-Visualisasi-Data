@@ -39,7 +39,7 @@ button:hover,select:hover{background:var(--gold)}
 @media(min-width:821px){#p5 .grid{grid-template-columns:.8fr 1.2fr}}
 h3{font-size:1rem;margin:1.1rem 0 .3rem}
 .side{display:flex;gap:1.2rem;align-items:center}.side>.scroll{flex:1;min-width:0}.leg.v{flex-direction:column;flex:0 0 200px;gap:.7rem;font-size:.88rem}.leg.v span{display:flex;align-items:flex-start}.leg.v i{flex:none;margin-top:3px}
-@media(max-width:820px){.side{flex-direction:column;align-items:stretch}.leg.v{flex:none;flex-direction:row;flex-wrap:wrap}#bars{min-width:760px}#od{min-width:1000px}#hm{min-width:560px}
+@media(max-width:820px){.side{flex-direction:column;align-items:stretch}.leg.v{flex:none;flex-direction:row;flex-wrap:wrap}#bars{min-width:760px}#od{min-width:1000px}#hm{min-width:560px}}
 #tip{position:fixed;pointer-events:none;opacity:0;background:var(--ink);color:#fff;padding:.45rem .65rem;font-size:.82rem;max-width:230px;z-index:99;border-radius:6px;line-height:1.4}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s,transform .9s}.rv.in{opacity:1;transform:none}
 #hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:radial-gradient(circle at 75% 60%,#12324a 0,#08111a 60%,#050b14 100%);overflow:hidden}
@@ -261,7 +261,7 @@ window.__bi=()=>svg.select(".br").call(br.move,null)}
 V.forEach((v,j)=>svg.append("text").attr("transform",`translate(${L+j*cw+cw/2},${T-5}) rotate(-50)`).attr("font-size",10.5).text(LB[v]));
 rows.forEach((d,i)=>{svg.append("text").attr("x",L-4).attr("y",T+i*rh+10.5).attr("text-anchor","end").attr("font-size",10.5).attr("class","mk").datum(d).text(d.provinsi);
 svg.append("g").selectAll("rect").data(V.map(v=>({...d,v,zz:d.z[v]}))).join("rect").attr("class","mk").attr("x",(e,j)=>L+j*cw).attr("y",T+i*rh).attr("width",cw-1).attr("height",rh-1).attr("fill",e=>c(e.zz)).on("pointermove",(ev,e)=>show(ev,`<b>${e.provinsi}</b><br>${LB[e.v]}: nilai asli ${n1(e[e.v])}<br>nilai baku ${n1(e.zz)}`)).on("pointerleave",hide)})}
-{const W=960,H=440,svg=d3.select("#pc").attr("viewBox",`0 0 ${W} ${H}`),x=d3.scalePoint(V,[60,W-60]),y=d3.extent(P.flatMap(d=>V.map(v=>d.z[v]))),[H-24,56]).nice(),ln=d=>d3.line()(V.map(v=>[x(v),y(d.z[v])])),ext={};
+{const W=960,H=440,svg=d3.select("#pc").attr("viewBox",`0 0 ${W} ${H}`),x=d3.scalePoint(V,[60,W-60]),y=d3.scaleLinear(d3.extent(P.flatMap(d=>V.map(v=>d.z[v]))),[H-24,56]).nice(),ln=d=>d3.line()(V.map(v=>[x(v),y(d.z[v])])),ext={};
 svg.append("g").selectAll("path").data(P).join("path").attr("class","mk").attr("d",ln).attr("fill","none").attr("stroke",col).attr("stroke-width",1.8).attr("stroke-opacity",.8).call(hov);
 const ax=svg.append("g").selectAll("g").data(V).join("g").attr("transform",v=>`translate(${x(v)},0)`);
 ax.each(function(v){const b=d3.brushY().extent([[-9,56],[9,H-24]]).on("brush end",e=>{if(!e.sourceEvent)return;if(e.selection)ext[v]=e.selection.map(y.invert).sort((a,c)=>a-c);else delete ext[v];const k=Object.keys(ext);sel=k.length?new Set(P.filter(p=>k.every(w=>p.z[w]>=ext[w][0]&&p.z[w]<=ext[w][1])).map(p=>p.key)):null;upd()});
