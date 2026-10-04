@@ -50,8 +50,6 @@ Jaringan migrasi antarprovinsi divisualisasikan menggunakan force-directed graph
 Analisis jaringan mencakup:
 
 - PageRank
-- Betweenness centrality
-- Community detection menggunakan algoritma Louvain
 - Filter bobot edge
 - Highlight tetangga saat node dipilih/di-hover
 
