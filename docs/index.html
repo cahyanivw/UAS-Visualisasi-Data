@@ -101,7 +101,7 @@ footer{background:#0c1a27;color:#c6d3df;padding:2rem 1.2rem;font-size:.85rem}foo
 <section id="hero" class="panel" data-t="Pembuka"><div id="globe" aria-hidden="true"></div><div class="wrap">
 <p class="kick">Webstory · BPS 2022</p>
 <h1>Ke mana orang pindah, dan siapa yang tertinggal?</h1>
-<p class="sub">Setiap hari orang meninggalkan satu provinsi untuk hidup di provinsi lain. </p>
+<p class="sub">Data migrasi risen 2022 memperlihatkan pola perpindahan antarprovinsi berdasarkan perbandingan tempat tinggal saat ini dengan lima tahun sebelumnya. </p>
 <div class="stats"><div><b id="c1">0</b><span>perpindahan antarprovinsi (migrasi risen)</span></div><div><b id="c2">0</b><span>provinsi</span></div><div><b id="c3">0</b><span>kabupaten/kota pada peta</span></div></div>
 </div><div class="cue">Scroll ↓</div></section>
 
@@ -111,7 +111,7 @@ footer{background:#0c1a27;color:#c6d3df;padding:2rem 1.2rem;font-size:.85rem}foo
 <p class="lead rv">Selisih orang masuk dan keluar tiap provinsi (migrasi neto) adalah ukuran paling sederhana untuk melihat siapa yang tumbuh dan siapa yang berkurang.</p>
 <div class="card rv"><div class="leg"><span><i style="background:var(--out)"></i>Lebih banyak yang keluar</span><span><i style="background:var(--in)"></i>Lebih banyak yang masuk</span><span class="hint">Arahkan kursor atau sentuh batang</span></div>
 <div class="scroll"><svg id="bars" role="img" aria-label="Migrasi neto 34 provinsi, 2022"></svg></div>
-<p class="src">Sumber: BPS, Arus Migrasi Risen Antar Provinsi, 2022 (tempat tinggal lima tahun sebelumnya). Diolah penulis. Migrasi neto = masuk − keluar, tanpa migrasi dalam provinsi.</p></div>
+<p class="src">Sumber: BPS, Arus Migrasi Risen Antar Provinsi, 2022. Diolah penulis. Migrasi neto = masuk − keluar, tanpa migrasi dalam provinsi.</p></div>
 </div></section>
 
 <section id="p2" class="panel" data-t="Arus"><div class="wrap">
@@ -124,9 +124,9 @@ footer{background:#0c1a27;color:#c6d3df;padding:2rem 1.2rem;font-size:.85rem}foo
 </div></section>
 
 <section id="p2b" class="panel" data-t="Matriks"><div class="wrap">
-<p class="kick rv">3 · Matriks asal–tujuan</p>
+<p class="kick rv">3 · Matriks jaringan asal–tujuan</p>
 <h2 class="rv">Jalur terpadat: DKI Jakarta ke Jawa Barat, 339.634 jiwa</h2>
-<p class="lead rv">Baris = provinsi asal, kolom = provinsi tujuan. Sel yang lebih terang berarti lebih banyak orang. Sel putih di diagonal adalah perpindahan dalam provinsi sendiri, tidak dihitung.</p>
+<p class="lead rv">Matriks ini sekaligus merepresentasikan adjacency matriks berarah: baris menunjukkan provinsi asal, kolom menunjukkan provinsi tujuan, dan intensitas sel menunjukkan bobot edge. Sel yang lebih terang berarti lebih banyak orang. Sel putih di diagonal adalah perpindahan dalam provinsi sendiri, tidak dihitung.</p>
 <div class="card rv"><div class="ctl"><label>Sorot provinsi asal <select id="odf"></select></label><span class="hint">Arahkan kursor ke sel</span></div>
 <div class="scroll"><svg id="od" role="img" aria-label="Matriks migrasi asal-tujuan"></svg></div>
 <p class="src">Sumber: BPS, Arus Migrasi Risen Antar Provinsi, 2022. Diolah penulis. Warna sel (skala logaritmik) = jumlah jiwa.</p></div>
@@ -159,7 +159,7 @@ footer{background:#0c1a27;color:#c6d3df;padding:2rem 1.2rem;font-size:.85rem}foo
 <div class="grid"><div><h3>Biplot PCA</h3><div class="scroll"><svg id="bi"></svg></div></div><div><h3>Heatmap terklaster (nilai baku)</h3><div class="leg"><span><i style="background:#b35806"></i>di atas rata-rata</span><span><i style="background:#542788"></i>di bawah rata-rata</span></div><div class="scroll"><svg id="hm"></svg></div></div></div>
 <h3>Koordinat paralel: 11 variabel sekaligus</h3><div class="scroll"><svg id="pc" style="min-width:680px"></svg></div>
 <p class="src">Sumber: BPS (persentase miskin, TPT, TPAK, rata-rata lama sekolah, UHH, pengeluaran per kapita, sanitasi, air minum, Gini, kepadatan, penduduk) dan matriks migrasi risen, 2022. Diolah penulis. Variabel dibakukan (z-score); kepadatan dilogaritma; migrasi neto per 1.000 penduduk. Panah = korelasi variabel dengan PC.</p></div>
-<p class="note rv">PC1 menjelaskan 44,5% variasi dan tiga PC pertama 72,5%. Silhouette 0,21 berarti klaster nyata tetapi batasnya tidak tegas.</p>
+<p class="note rv">PC1 menjelaskan 44,5% variasi dan tiga PC pertama 72,5%. Nilai silhouette 0,21 menunjukkan pemisahan antarklaster relatif lemah, sehingga ketiga klaster lebih tepat dibaca sebagai kelompok dengan karakteristik yang cenderung berbeda, bukan batas yang tegas.</p>
 </div></section>
 
 <section id="p6" class="panel" data-t="Temuan utama"><div class="wrap">
