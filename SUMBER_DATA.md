@@ -1,7 +1,6 @@
 # Sumber Data
 
-Seluruh data utama bersumber dari **Badan Pusat Statistik (BPS)**. Tahun data seragam: **2022**.
-Tanggal akses diisi sesuai hari saat tabel diunduh.
+Seluruh data utama yang digunakan dalam webstory bersumber dari **Badan Pusat Statistik (BPS)** dan menggunakan tahun data **2022**. Data kemudian diolah dan diturunkan menjadi variabel analisis sesuai kebutuhan masing-masing visualisasi.
 
 ## Tabel BPS
 
@@ -27,16 +26,26 @@ Tanggal akses diisi sesuai hari saat tabel diunduh.
 | Batas provinsi (GeoJSON) | Badan Informasi Geospasial (BIG), melalui repositori `ardian28/GeoJson-Indonesia-38-Provinsi` | MIT |
 | Batas kab/kota (GeoJSON) | GADM v4.0 (gadm.org), lewat repositori `mahendrayudha/indonesia-geojson` | Cek ketentuan di gadm.org |
 
-## Data turunan (dihitung sendiri)
+## Data turunan 
 
-- **Migrasi neto** = migrasi masuk − migrasi keluar antarprovinsi (tanpa migrasi dalam provinsi dan tanpa "Luar negeri"), dari tabel No. 1.
-- **Migrasi neto per 1.000 penduduk** = migrasi neto / jumlah penduduk (ribu), penyebut dari tabel No. 11.
-- **ln kepadatan** = logaritma natural kepadatan penduduk, dari tabel No. 11.
+Variabel berikut dihitung dari data BPS:
+
+- **Migrasi neto** = migrasi masuk − migrasi keluar antarprovinsi, tanpa migrasi dalam provinsi dan tanpa kategori "Luar negeri".
+- **Migrasi neto per 1.000 penduduk** = migrasi neto / jumlah penduduk (ribu), dengan penyebut berasal dari Tabel No. 11.
+- **ln kepadatan** = logaritma natural kepadatan penduduk dari Tabel No. 11.
+
+### Catatan migrasi risen
+
+Data migrasi pada Tabel No. 1 merupakan **data migrasi risen tahun 2022**. Migrasi risen menggambarkan perpindahan tempat tinggal berdasarkan perbandingan tempat tinggal penduduk saat ini dengan tempat tinggal lima tahun sebelumnya.
+
+Dengan demikian, visualisasi migrasi dalam webstory merepresentasikan **pola migrasi risen pada data tahun 2022**, bukan arus perpindahan penduduk secara harian.
 
 ## Catatan batas wilayah
 
-Tabel No. 2-5, 6-7, 11 memakai batas 34 provinsi (Papua dan Papua Barat belum dipecah), sama dengan matriks migrasi. Tabel No. 12 (IPM) memakai batas 38 provinsi, sehingga nilai IPM Papua dan Papua Barat dikosongkan.
+Tabel No. 2-5, 6-7, dan 11 menggunakan batas 34 provinsi (Papua dan Papua Barat belum dipecah), sesuai dengan matriks migrasi yang digunakan dalam analisis.
+
+Tabel No. 12 (IPM) menggunakan batas 38 provinsi, sehingga nilai IPM Papua dan Papua Barat dikosongkan dan IPM tidak digunakan sebagai input PCA.
 
 ## Format teks "Sumber" untuk setiap visualisasi
 
-> Sumber: BPS (judul tabel, 2022). Diolah penulis.
+> **Sumber: BPS (judul tabel, 2022). Diolah penulis.**
